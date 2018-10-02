@@ -15,7 +15,7 @@ class Employee(models.Model):
     def __str__(self):
         return f"{self.id} {self.last}, {self.first} -- Position: {self.rank}"
 
-class Toppings(models.Model):
+class Topping(models.Model):
     name = models.CharField(max_length=64)
     cost_LargeReg_Pizza = models.DecimalField(max_digits=6, decimal_places=2)
     cost_SmallReg_Pizza = models.DecimalField(max_digits=6, decimal_places=2)

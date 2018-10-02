@@ -1,0 +1,24 @@
+Pepperoni
+Sausage
+Mushrooms
+Onions
+Ham
+Canadian Bacon
+Pineapple
+Eggplant
+Tomato & Basil
+Green Peppers
+Hamburger
+Spinach
+Artichoke
+Buffalo Chicken
+Barbecue Chicken
+Anchovies
+Black Olives
+Fresh Garlic
+Zucchini
+Cheese 	12.20 	17.45
+1 topping 	13.20 	19.45
+2 toppings 	14.70 	21.45
+3 toppings 	15.70 	23.45
+Special 	17.25 	25.45

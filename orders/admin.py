@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Customer, Employee,Toppings,Menu_Item
+from .models import Customer, Employee,Topping,Menu_Item
 
 # Register your models here.
 
@@ -14,5 +14,5 @@ class EmployeeInline(admin.ModelAdmin):
 
 admin.site.register(Customer)
 admin.site.register(Employee, EmployeeInline)
-admin.site.register(Toppings)
+admin.site.register(Topping)
 admin.site.register(Menu_Item)
