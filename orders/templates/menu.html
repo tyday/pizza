@@ -1,0 +1,30 @@
+{% extends "base_generic.html" %}
+
+{% block title %}
+<title>Pinochio's Menu</title>
+{% endblock title %}
+
+{% block content %}
+    <h1>Menu</h1>
+    <h2>Pizza</h2>
+    <h3>Regular</h3>
+    <ul>
+        <li class="pizza_menu"><div class="pizza_name"></div><div class="pizza_cost_small">Small</div><div class="pizza_cost_large">Large</div></li>
+        {% for pizza in reg_pizzas %}
+        <li class="pizza_menu"><div class="pizza_name">{{ pizza.name }}</div>
+            <div class="pizza_cost_small">{{ pizza.price_small }}</div>
+            <div class="pizza_cost_large">{{ pizza.price_large }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+    <h3>Sicilian</h3>
+    <ul>
+        <li class="pizza_menu"><div class="pizza_name"></div><div class="pizza_cost_small">Small</div><div class="pizza_cost_large">Large</div></li>
+        {% for pizza in sic_pizzas %}
+        <li class="pizza_menu"><div class="pizza_name">{{ pizza.name }}</div>
+            <div class="pizza_cost_small">{{ pizza.price_small }}</div>
+            <div class="pizza_cost_large">{{ pizza.price_large }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
