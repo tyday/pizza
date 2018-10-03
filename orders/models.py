@@ -1,19 +1,6 @@
 from django.db import models
 
 # Create your models here.
-class Customer(models.Model):
-    first = models.CharField(max_length=64)
-    last = models.CharField(max_length=64)
-    email = models.EmailField(max_length=254)
-
-class Employee(models.Model):
-    first = models.CharField(max_length=64)
-    last = models.CharField(max_length=64)
-    email = models.EmailField(max_length=254)
-    rank = models.CharField(max_length=64)
-
-    def __str__(self):
-        return f"{self.id} {self.last}, {self.first} -- Position: {self.rank}"
 
 class Topping(models.Model):
     name = models.CharField(max_length=64)
