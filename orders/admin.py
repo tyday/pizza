@@ -17,9 +17,6 @@ class Menu_ItemInline(admin.ModelAdmin):
                     'toppings','included_toppings')
     list_editable = ('name', 'category', 'subcategory','price_small','price_large',
                     'toppings','included_toppings')
-# class CustomerInline(admin.StackedInline):
-#     model = Customer
-#     extra = 1
 
 admin.site.register(Customer)
 admin.site.register(Employee, EmployeeInline)
