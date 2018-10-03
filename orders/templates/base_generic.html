@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% block title %}<title>Pinochio's Pizza % Subs</title>{% endblock %}
+    <!-- Add additional CSS in static file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav>
+        {% block nav %}
+            <ul class="topbar-nav">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'menu' %}">Menu</a></li>
+                <li><a href="#">Directions</a></li>
+                <li><a href="#">Hours</a></li>
+                <li><a href="#">Sicilian vs. Regular</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        {% endblock nav %}
+    </nav>
+    <section>
+        {% block content %}{% endblock %}
+    </section> 
+</body>
+</html>

@@ -1,0 +1,13 @@
+.topbar-nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.pizza_menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+.pizza_menu div{
+    flex-basis: 30%;
+}
