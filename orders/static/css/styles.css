@@ -38,6 +38,13 @@ nav > ul > li:hover{
     flex-direction: row;
     justify-content: space-evenly;
 }
+.pizza_menu:nth-child(2n+2){
+    background-color: hsla(41, 64%, 56%, .7);
+}
+.pizza_menu:nth-child(1n+2):hover{
+    background-color: hsla(26, 100%, 35%, .7);
+    cursor: pointer;
+}
 .pizza_menu div{
     flex-basis: 30%;
 }

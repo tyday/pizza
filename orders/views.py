@@ -17,12 +17,16 @@ def menu(request):
     reg_pizzas = Menu_Item.objects.filter(category='pizza', subcategory="regular")
     sic_pizzas = Menu_Item.objects.filter(category='pizza', subcategory="sicilian")
     salads = Menu_Item.objects.filter(category='salad')
+    pasta = Menu_Item.objects.filter(category='pasta')
+    dinner_platters = Menu_Item.objects.filter(category='dinner platters')
 
     context = {
         'sandwiches':sandwiches,
         'reg_pizzas': reg_pizzas,
         'sic_pizzas': sic_pizzas,
+        'pasta': pasta,
         'salads': salads,
+        'dinner_platters':dinner_platters,
     }
     return render(request, 'menu.html', context=context)
 

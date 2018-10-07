@@ -32,6 +32,7 @@ class Menu_Item(models.Model):
     price_large = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     price_small = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     included_toppings = models.IntegerField(null=True, blank=True)
+    description = models.TextField(max_length=300, null=True, blank=True)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

@@ -1,4 +1,5 @@
 {% extends "base_generic.html" %}
+{% load static %}
 
 {% block title %}
 <title>Pinochio's Menu</title>
@@ -27,4 +28,52 @@
         </li>
         {% endfor %}
     </ul>
+    <h2>Sandwiches</h2>
+    <ul>
+        <li class="pizza_menu"><div class="pizza_name"></div><div class="pizza_cost_small">Small</div><div class="pizza_cost_large">Large</div></li>
+        {% for item in  sandwiches %}
+        <li class="pizza_menu" -data-description="{{ item.description }}"">
+            <div class="pizza_name">{{ item.name }}</div>
+            <div class="pizza_cost_small">{% if item.price_small %}{{ item.price_small }}{% endif %}</div>
+            <div class="pizza_cost_large">{% if item.price_large %}{{ item.price_large }}{% endif %}</div>
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Pasta</h2>
+    <ul>
+        <li class="pizza_menu"><div class="pizza_name"></div><div class="pizza_cost_small">Small</div><div class="pizza_cost_large">Large</div></li>
+        {% for item in  pasta %}
+        <li class="pizza_menu" -data-description="{{ item.description }}"">
+            <div class="pizza_name">{{ item.name }}</div>
+            <div class="pizza_cost_small">{% if item.price_small %}{{ item.price_small }}{% endif %}</div>
+            <div class="pizza_cost_large">{% if item.price_large %}{{ item.price_large }}{% endif %}</div>
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Salads</h2>
+    <ul>
+        <li class="pizza_menu"><div class="pizza_name"></div><div class="pizza_cost_small">Small</div><div class="pizza_cost_large">Large</div></li>
+        {% for item in  salads %}
+        <li class="pizza_menu" -data-description="{{ item.description }}"">
+            <div class="pizza_name">{{ item.name }}</div>
+            <div class="pizza_cost_small">{% if item.price_small %}{{ item.price_small }}{% endif %}</div>
+            <div class="pizza_cost_large">{% if item.price_large %}{{ item.price_large }}{% endif %}</div>
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>Dinner Platters</h2>
+    <ul>
+        <li class="pizza_menu"><div class="pizza_name"></div><div class="pizza_cost_small">Small</div><div class="pizza_cost_large">Large</div></li>
+        {% for item in  dinner_platters %}
+        <li class="pizza_menu" -data-description="{{ item.description }}"">
+            <div class="pizza_name">{{ item.name }}</div>
+            <div class="pizza_cost_small">{% if item.price_small %}{{ item.price_small }}{% endif %}</div>
+            <div class="pizza_cost_large">{% if item.price_large %}{{ item.price_large }}{% endif %}</div>
+        </li>
+        {% endfor %}
+    </ul>
 {% endblock content %}
+{% block scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/menu.js' %}"></script>
+{% endblock %}
