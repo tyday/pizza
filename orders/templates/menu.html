@@ -32,7 +32,7 @@
     <ul>
         <li class="pizza_menu"><div class="pizza_name"></div><div class="pizza_cost_small">Small</div><div class="pizza_cost_large">Large</div></li>
         {% for item in  sandwiches %}
-        <li class="pizza_menu" -data-description="{{ item.description }}" onclick="selectMenuItem('{{ item.name }}')">
+        <li class="pizza_menu" -data-description="{{ item.description }}" onclick="selectMenuItem(this,'{{ item.name }}','{{ item.description }}')">
             <div class="pizza_name">{{ item.name }}</div>
             <div class="pizza_cost_small">{% if item.price_small %}{{ item.price_small }}{% endif %}</div>
             <div class="pizza_cost_large">{% if item.price_large %}{{ item.price_large }}{% endif %}</div>

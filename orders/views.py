@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from orders.models import Menu_Item
+from orders.models import Menu_Item, Topping
 
 
 # Create your views here.
@@ -19,6 +19,7 @@ def menu(request):
     salads = Menu_Item.objects.filter(category='salad')
     pasta = Menu_Item.objects.filter(category='pasta')
     dinner_platters = Menu_Item.objects.filter(category='dinner platters')
+    toppings = Topping.objects.all()
 
     context = {
         'sandwiches':sandwiches,
@@ -27,6 +28,7 @@ def menu(request):
         'pasta': pasta,
         'salads': salads,
         'dinner_platters':dinner_platters,
+        'toppings': toppings,
     }
     return render(request, 'menu.html', context=context)
 
