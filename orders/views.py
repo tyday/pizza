@@ -1,6 +1,8 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 from orders.models import Menu_Item
+
 
 # Create your views here.
 def index(request):
@@ -23,3 +25,8 @@ def menu(request):
         'salads': salads,
     }
     return render(request, 'menu.html', context=context)
+
+def user(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('index'))
+    return render(request,'user.html')

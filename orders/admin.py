@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Topping,Menu_Item
+from .models import Topping,Menu_Item,Profile
 
 # Register your models here.
 
@@ -18,3 +18,4 @@ class Menu_ItemInline(admin.ModelAdmin):
 
 admin.site.register(Topping, ToppingInline)
 admin.site.register(Menu_Item, Menu_ItemInline)
+admin.site.register(Profile)
