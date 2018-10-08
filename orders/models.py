@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+# from django.http import JsonResponse
+import json
 
 
 
@@ -19,10 +21,11 @@ class Topping(models.Model):
     cost_Large_Sub = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     category = models.CharField(max_length=128)
 
-
     def __str__(self):
         return (f"{self.id} {self.name} Small Reg:{self.cost_SmallReg_Pizza} Large Reg: {self.cost_LargeReg_Pizza} Small Sic: {self.cost_SmallSic_Pizza} "
                 f"Large Sic: {self.cost_LargeSic_Pizza} Small Sub: {self.cost_Small_Sub} Large Sub: {self.cost_Large_Sub}")
+    def __repr__(self):
+        return (f"{self.id}")
 
 class Menu_Item(models.Model):
     name = models.CharField(max_length=64)
@@ -34,6 +37,21 @@ class Menu_Item(models.Model):
     included_toppings = models.IntegerField(null=True, blank=True)
     description = models.TextField(max_length=300, null=True, blank=True)
     allowedtoppings = models.ManyToManyField(Topping)
+
+    def getToppings(self):
+        returnDict = {}
+        for item in self.allowedtoppings.all():
+            itemname = item.name
+            if self.category == 'pizza' and self.subcategory == 'sicilian':
+                price = {'price_large':str(item.cost_LargeSic_Pizza),'price_small':str(item.cost_SmallSic_Pizza)}
+            elif self.category == 'pizza' and self.subcategory == 'regular':
+                price = {'price_large':str(item.cost_LargeReg_Pizza),'price_small':str(item.cost_SmallReg_Pizza)}
+            elif self.category == 'sub':
+                price = { "price_large":str(item.cost_Large_Sub),"price_small":str(item.cost_Small_Sub)}
+            else:
+                price = {}
+            returnDict[itemname] = price
+        return json.dumps(returnDict)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
