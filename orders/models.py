@@ -38,6 +38,24 @@ class Menu_Item(models.Model):
     description = models.TextField(max_length=300, null=True, blank=True)
     allowedtoppings = models.ManyToManyField(Topping)
 
+    def getInvoiceName(self):
+        returnList = []
+        if self.subcategory:
+            returnList.append(self.subcategory)
+        if self.category:
+            returnList.append(self.category)
+        if self.name:
+            returnList.append(self.name)
+        return str.title(" ".join(returnList))
+    def getItemJson(self):
+        returnDict = {}
+        name = self.name
+        price_large = str(self.price_large)
+        price_small = str(self. price_small)
+        invoice_name = self.getInvoiceName()
+        returnDict = {"name":name,"price_large":price_large,"price_small":price_small,"invoice_name":invoice_name}
+        return json.dumps(returnDict)
+
     def getToppings(self):
         returnDict = {}
         for item in self.allowedtoppings.all():
