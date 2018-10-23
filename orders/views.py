@@ -32,6 +32,9 @@ def menu(request):
     }
     return render(request, 'menu.html', context=context)
 
+def shoppingcart(request):
+    return render(request, 'shoppingcart.html')
+
 def user(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('index'))
