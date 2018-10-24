@@ -149,6 +149,7 @@ function add_to_shoppingcart(){
             let topping = {}
             selectionValue = JSON.parse(toppings[i].value)
             topping.name = selectionValue[0]
+            topping.id = selectionValue[1].id
             if (item_size == "small"){
                 topping.cost = selectionValue[1].price_small;
             }else {
@@ -158,7 +159,7 @@ function add_to_shoppingcart(){
             
         }
     } catch(e) { console.log(e)}
-    let itemToAddToCart = {"item":cart_item["invoice_name"],"toppings":toppings_list, "cost":item_price}
+    let itemToAddToCart = {"item":cart_item["invoice_name"],"toppings":toppings_list, "cost":item_price,"id":cart_item["id"]}
     console.log('hello!')
     console.log(itemToAddToCart)
 

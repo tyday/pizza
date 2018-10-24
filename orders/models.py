@@ -49,11 +49,12 @@ class Menu_Item(models.Model):
         return str.title(" ".join(returnList))
     def getItemJson(self):
         returnDict = {}
+        id = self.id
         name = self.name
         price_large = str(self.price_large)
         price_small = str(self. price_small)
         invoice_name = self.getInvoiceName()
-        returnDict = {"name":name,"price_large":price_large,"price_small":price_small,"invoice_name":invoice_name}
+        returnDict = {"id":id, "name":name,"price_large":price_large,"price_small":price_small,"invoice_name":invoice_name}
         return json.dumps(returnDict)
 
     def getToppings(self):
@@ -68,6 +69,7 @@ class Menu_Item(models.Model):
                 price = { "price_large":str(item.cost_Large_Sub),"price_small":str(item.cost_Small_Sub)}
             else:
                 price = {}
+            price["id"] = item.id
             returnDict[itemname] = price
         return json.dumps(returnDict)
 
