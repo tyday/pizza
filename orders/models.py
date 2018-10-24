@@ -71,19 +71,6 @@ class Menu_Item(models.Model):
             returnDict[itemname] = price
         return json.dumps(returnDict)
 
-class Orders(models.Model):
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
-    date = models.DateTimeField()
-class OrderItems(models.Model):
-    order = models.ForeignKey(Orders, on_delete=models.CASCADE):
-    size = models.CharField(max_length=64)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-class OrderItemsToppings(models.Model):
-    orderitems = models.ForeignKey(OrderItems, on_delete=models.CASCADE)
-    topping = models.ForeignKey(Topping,on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phonenumber = models.CharField(max_length=10,null=True,blank=True)
