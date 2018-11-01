@@ -49,6 +49,7 @@ def addtocart(request):
     orderitem = OrderItems(item=menu_item,size=orderinfo[0]['size'],price=orderinfo[0]['cost'])
     toppings = orderinfo[0]['toppings']
     print(orderitem.size,orderitem.price,orderitem.item, toppings)
+    orderitem.save()
     if toppings:
         for item in toppings:
             topping_item = Topping.objects.get(pk=item['id'])
@@ -57,7 +58,6 @@ def addtocart(request):
             print(item)
     # for item in orderinfo:
     #     print(item)
-    # orderitem.save()
     return response
 def user(request):
     if not request.user.is_authenticated:
