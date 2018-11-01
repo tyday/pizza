@@ -56,8 +56,7 @@ def addtocart(request):
             topping = OrderItemsToppings(orderitems=orderitem,topping=topping_item,price=item['cost'])
             topping.save()
             print(item)
-    # for item in orderinfo:
-    #     print(item)
+    shoppingcart.append(orderitem)
     return response
 def user(request):
     if not request.user.is_authenticated:
