@@ -1,6 +1,22 @@
 let thisvariable=0;
 let shopping_cart = [];
 
+function getCookie(name) {
+    if (!document.cookie) {
+      return null;
+    }
+  
+    const xsrfCookies = document.cookie.split(';')
+      .map(c => c.trim())
+      .filter(c => c.startsWith(name + '='));
+  
+    if (xsrfCookies.length === 0) {
+      return null;
+    }
+  
+    return decodeURIComponent(xsrfCookies[0].split('=')[1]);
+  }
+
 function selectMenuItem(li, itemName, itemDescription, itemJsonII){
     // const itemJson = li.dataset.name;
     const itemJson = JSON.parse(itemJsonII);
@@ -159,9 +175,32 @@ function add_to_shoppingcart(){
             
         }
     } catch(e) { console.log(e)}
-    let itemToAddToCart = {"item":cart_item["invoice_name"],"toppings":toppings_list, "cost":item_price,"id":cart_item["id"]}
+    let itemToAddToCart = {"item":cart_item["invoice_name"],"toppings":toppings_list, "cost":item_price,"id":cart_item["id"],"size":document.querySelector('input[name="size"]:checked').value}
     console.log('hello!')
     console.log(itemToAddToCart)
 
     shopping_cart.push(itemToAddToCart)
+    // httpRequest = new XMLHttpRequest();
+    // httpRequest.onreadystatechange = function(){
+    //     console.log('hi_there')
+    // };
+    // httpRequest.open('POST','/addtocart/',true);
+    // httpRequest.send(shopping_cart);
+    csrfToken = getCookie('csrftoken')  
+    fetch('/addtocart/',{
+        method: 'POST',
+        credentials: 'include',
+        body: JSON.stringify(shopping_cart),
+        headers:{
+            'X-CSRFToken': csrfToken,
+            'Content-Type': 'application/json'
+        }
+    }).then(function(response){
+            console.log('hi_there',response);
+            return response.json()
+        })
+        .then (function(myBlob){
+            console.log(myBlob);
+            shopping_cart = [];
+        })
 }

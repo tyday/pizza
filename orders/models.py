@@ -78,6 +78,7 @@ class Orders(models.Model):
     date = models.DateTimeField()
 class OrderItems(models.Model):
     order = models.ForeignKey(Orders, on_delete=models.CASCADE)
+    item = models.ForeignKey(Menu_Item, on_delete=models.CASCADE)
     size = models.CharField(max_length=64)
     price = models.DecimalField(max_digits=6, decimal_places=2)
 class OrderItemsToppings(models.Model):
