@@ -81,6 +81,12 @@ class OrderItems(models.Model):
     item = models.ForeignKey(Menu_Item, on_delete=models.CASCADE)
     size = models.CharField(max_length=64)
     price = models.DecimalField(max_digits=6, decimal_places=2)
+    def total_cost(self):
+        ret_total_cost = 0.00
+        ret_total_cost += float(self.price)
+        for topp in self.orderitemstoppings_set.all():
+            ret_total_cost += float(topp.price)
+        return ret_total_cost
 class OrderItemsToppings(models.Model):
     orderitems = models.ForeignKey(OrderItems, on_delete=models.CASCADE)
     topping = models.ForeignKey(Topping,on_delete=models.CASCADE)

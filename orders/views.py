@@ -6,7 +6,7 @@ import json
 
 from orders.models import Menu_Item, Topping, OrderItems, OrderItemsToppings
 
-shoppingcart = []
+shopping_cart_list = []
 # Create your views here.
 def index(request):
     # return HttpResponse("Project 3: TODO")
@@ -37,7 +37,10 @@ def menu(request):
     return render(request, 'menu.html', context=context)
 
 def shoppingcart(request):
-    return render(request, 'shoppingcart.html')
+    context={
+        'shoppingcart':shopping_cart_list,
+    }
+    return render(request, 'shoppingcart.html',context=context)
 def addtocart(request):
     if request.user.is_authenticated:
         response = JsonResponse({"foo":"bar"})
@@ -56,8 +59,10 @@ def addtocart(request):
             topping = OrderItemsToppings(orderitems=orderitem,topping=topping_item,price=item['cost'])
             topping.save()
             print(item)
-    shoppingcart.append(orderitem)
+    shopping_cart_list.append(orderitem)
     return response
+def removefromcart(request):
+    
 def user(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('index'))

@@ -176,16 +176,10 @@ function add_to_shoppingcart(){
         }
     } catch(e) { console.log(e)}
     let itemToAddToCart = {"item":cart_item["invoice_name"],"toppings":toppings_list, "cost":item_price,"id":cart_item["id"],"size":document.querySelector('input[name="size"]:checked').value}
-    console.log('hello!')
-    console.log(itemToAddToCart)
+    // console.log('hello!')
+    // console.log(itemToAddToCart)
 
     shopping_cart.push(itemToAddToCart)
-    // httpRequest = new XMLHttpRequest();
-    // httpRequest.onreadystatechange = function(){
-    //     console.log('hi_there')
-    // };
-    // httpRequest.open('POST','/addtocart/',true);
-    // httpRequest.send(shopping_cart);
     csrfToken = getCookie('csrftoken')  
     fetch('/addtocart/',{
         method: 'POST',
@@ -197,6 +191,7 @@ function add_to_shoppingcart(){
         }
     }).then(function(response){
             console.log('hi_there',response);
+            cancelSelection()
             return response.json()
         })
         .then (function(myBlob){
