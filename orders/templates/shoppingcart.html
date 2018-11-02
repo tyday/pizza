@@ -3,9 +3,19 @@
 {% block title %}
 <title>Pinochio's Menu</title>
 {% endblock title %}
-
 {% block content %}
 <p>welcome to shopping cart</p>
+<ul>
+{% for order_item in shoppingcart %}
+    <li>{{ order_item.size.title }} {{ order_item.item.name.title }} {% if order_item.item.subcategory %}{{ order_item.item.subcategory.title }}{% endif %} {{ order_item.item.category.title }}</li>
+    <ul>
+        {% for topping in order_item.orderitemstoppings_set.all %}
+        <li>{{ topping.topping.name }}</li>
+        {% endfor %}
+    </ul>
+    <p>Cost: ${{ order_item.total_cost|stringformat:".2f" }}</p>
+    <button id="remove" onclick="remove_from_shoppingcart(event)" data-itemID="{{ order_item.id }}">Remove</button>
+{% endfor %}
 {% endblock content %}
 
 {% block scripts %}
