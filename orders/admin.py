@@ -15,10 +15,18 @@ class Menu_ItemInline(admin.ModelAdmin):
     list_editable = ('name', 'category', 'subcategory','price_small','price_large',
                     'toppings','included_toppings')
 
+class OrderItemsInline(admin.TabularInline):
+    model = OrderItems
+class OrdersAdmin(admin.ModelAdmin):
+    inlines = [
+        OrderItemsInline,
+    ]
+
 
 admin.site.register(Topping, ToppingInline)
 admin.site.register(Menu_Item, Menu_ItemInline)
 admin.site.register(Profile)
-admin.site.register(Orders)
+admin.site.register(Orders,OrdersAdmin)
 admin.site.register(OrderItems)
 admin.site.register(OrderItemsToppings)
+# admin.site.register(OrdersAdmin)

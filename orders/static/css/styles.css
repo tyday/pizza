@@ -68,3 +68,14 @@ nav > ul > li:hover{
     min-height: 200px;
     background-color: white;
 }
+.shoppingcartListItem{
+    /* width: 100%; */
+    position: relative;
+    transition: height .5s, opacity .3s;
+    top: 0;
+}
+.vanishingItem{
+    height: 0px;
+    opacity: 0;
+    overflow: hidden;
+}

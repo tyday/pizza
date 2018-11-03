@@ -2,9 +2,9 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.decorators.csrf import ensure_csrf_cookie
-import json
+import json, datetime
 
-from orders.models import Menu_Item, Topping, OrderItems, OrderItemsToppings
+from orders.models import Menu_Item, Topping, Orders, OrderItems, OrderItemsToppings
 
 shopping_cart_list = []
 # Create your views here.
@@ -62,7 +62,25 @@ def addtocart(request):
     shopping_cart_list.append(orderitem)
     return response
 def removefromcart(request):
-    
+    print('remove from cart 1st print',request.body.decode('utf-8'))
+    itemID = request.body.decode('utf-8')
+    item_to_remove = OrderItems.objects.get(pk=itemID)
+    shopping_cart_list.remove(item_to_remove)
+    item_to_remove.delete()
+    response = JsonResponse({"foo":"bar"})
+    return response
+
+def placeorder(request):
+    if not request.user.is_authenticated:
+        return
+    user = request.user
+    now = datetime.datetime.now()
+    current_order = Orders(customer=user, date=now)
+    current_order.save()
+    for orderItem in shopping_cart_list:
+        orderItem.order = current_order
+        orderItem.save()
+    shopping_cart_list = []
 def user(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('index'))

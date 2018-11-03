@@ -28,6 +28,19 @@ class Topping(models.Model):
         return (f"{self.id}")
 
 class Menu_Item(models.Model):
+    """Individual Item (pizza/sandwich)
+
+    Attributes:
+        name            name of item
+        category        
+        subcategory
+        toppings        category reference to Toppings.category
+        price_large     cost for large size
+        price_small     cost for small
+        included_toppings   integer that holds number of toppings included at cost
+        description     description
+        allowedtoppings     not exactly sure what this does
+    """
     name = models.CharField(max_length=64)
     category = models.CharField(max_length=64, null=True, blank=True)
     subcategory = models.CharField(max_length=64, null=True, blank=True)
@@ -74,9 +87,26 @@ class Menu_Item(models.Model):
         return json.dumps(returnDict)
 
 class Orders(models.Model):
+    """Holds OrderItems
+
+    Attributes:
+        customer    A user
+        date        a datetime.datetime
+    """
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField()
 class OrderItems(models.Model):
+    """An individual item (A pizza, a sandwich)
+        holds OrderItemsToppings
+    
+    Attributes:
+        order   a class Order reference
+        item    a class Menu_Item reference
+        size    a string (large/small)
+        price   a decimal field
+
+        total_cost  returns cost of item and toppings
+    """
     order = models.ForeignKey(Orders, on_delete=models.CASCADE, null=True)
     item = models.ForeignKey(Menu_Item, on_delete=models.CASCADE)
     size = models.CharField(max_length=64)
