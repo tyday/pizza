@@ -51,6 +51,14 @@ class Menu_Item(models.Model):
     description = models.TextField(max_length=300, null=True, blank=True)
     allowedtoppings = models.ManyToManyField(Topping)
 
+    def __str__(self):
+        cat_label = ""
+        if self.subcategory:
+            cat_label = f"{self.subcategory} {self.category}"
+        else:
+            cat_label = f"{self.category}"
+        return f"{cat_label} {self.name}".title()
+
     def getInvoiceName(self):
         returnList = []
         if self.subcategory:
@@ -95,6 +103,9 @@ class Orders(models.Model):
     """
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField()
+
+    def __str__(self):
+        return (f"{self.customer.get_full_name()} {self.date}")
 class OrderItems(models.Model):
     """An individual item (A pizza, a sandwich)
         holds OrderItemsToppings

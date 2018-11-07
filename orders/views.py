@@ -71,8 +71,11 @@ def removefromcart(request):
     return response
 
 def placeorder(request):
+    # print('placeorder shoppingcartlist: ',shopping_cart_list)
     if not request.user.is_authenticated:
-        return
+        return HttpResponse('Must log in')
+    if not shopping_cart_list:
+        return HttpResponse('No items in shopping cart')
     user = request.user
     now = datetime.datetime.now()
     current_order = Orders(customer=user, date=now)
@@ -80,7 +83,8 @@ def placeorder(request):
     for orderItem in shopping_cart_list:
         orderItem.order = current_order
         orderItem.save()
-    shopping_cart_list = []
+    shopping_cart_list.clear()
+    return HttpResponse('')
 def user(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('index'))

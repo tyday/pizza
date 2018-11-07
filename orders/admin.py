@@ -22,11 +22,18 @@ class OrdersAdmin(admin.ModelAdmin):
         OrderItemsInline,
     ]
 
+class OrderItemsToppingsInline(admin.TabularInline):
+    model = OrderItemsToppings
+class OrderItemsAdmin(admin.ModelAdmin):
+    inlines = [
+        OrderItemsToppingsInline,
+    ]
+
 
 admin.site.register(Topping, ToppingInline)
 admin.site.register(Menu_Item, Menu_ItemInline)
 admin.site.register(Profile)
 admin.site.register(Orders,OrdersAdmin)
-admin.site.register(OrderItems)
+admin.site.register(OrderItems, OrderItemsAdmin)
 admin.site.register(OrderItemsToppings)
 # admin.site.register(OrdersAdmin)
